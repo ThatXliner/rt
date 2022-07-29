@@ -10,7 +10,7 @@ enum Group {
     Name(String),
 }
 #[derive(Parser)]
-#[clap(author="Bryan Hu", version="0.1.0", about="Regex-based text extraction utility", long_about = None)]
+#[clap(author = "Bryan Hu", version = "0.1.0", about = "Regex-based text extraction utility", long_about = None)]
 struct Cli {
     /// The regex to use
     #[clap(value_parser)]
@@ -21,7 +21,7 @@ struct Cli {
     /// Which capture group to print?
     #[clap(short, long, value_parser, default_value_t = 0)]
     group: usize,
-    /// Which capture group to print? Has precedence over group
+    /// Which capture group to print? Has precedence over --group
     #[clap(short = 'n', long, value_parser, value_name = "NAME")]
     group_name: Option<String>,
     /// Execute on the whole thing instead of line-by-line [default: false]
@@ -80,7 +80,6 @@ fn _main() -> i32 {
                         if let Some(val) = capture {
                             println!("{}", val.as_str());
                         } else {
-                            println!("");
                             return 1;
                         }
                     }
@@ -97,6 +96,8 @@ fn _main() -> i32 {
                             let capture = get_cap_groups(&matcher, &group, line.unwrap());
                             if let Some(val) = capture {
                                 println!("{}", val.as_str());
+                            } else {
+                                return 1;
                             }
                         }
                     }
