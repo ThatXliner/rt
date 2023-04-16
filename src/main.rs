@@ -15,13 +15,13 @@ struct Cli {
     /// The regex to use
     #[clap(value_parser)]
     regex: String,
-    /// The file contents to find using regex. [default: stdin]
+    /// The file to execute on [default: stdin]
     #[clap(value_parser, value_name = "FILE")]
     file: Option<PathBuf>,
-    /// Which capture group to print?
+    /// The capture group number to print
     #[clap(short, long, value_parser, default_value_t = 0)]
     group: usize,
-    /// Which capture group to print? Has precedence over --group
+    /// The name of the capture group to print. Has precedence over --group
     #[clap(short = 'n', long, value_parser, value_name = "NAME")]
     group_name: Option<String>,
     /// Execute on the whole thing instead of line-by-line [default: false]
@@ -97,7 +97,7 @@ fn _main() -> i32 {
                             if let Some(val) = capture {
                                 println!("{}", val.as_str());
                             } else {
-                                return 1;
+                                continue;
                             }
                         }
                     }
