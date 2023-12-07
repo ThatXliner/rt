@@ -35,13 +35,19 @@ cargo build --release
 Extract email addresses from a file:
 
 ```bash
-rt '([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})' file.txt
+rt '([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})' file.txt --doc
 ```
 
 Extract phone numbers from a string:
 
 ```bash
-rt '(\d{3}-\d{3}-\d{4})' "Contact: 123-456-7890, 987-654-3210"
+echo "Contact: 123-456-7890, 987-654-3210" | rt '(\d{3}-\d{3}-\d{4})' 
+```
+
+Getting the folder names of tarballs:
+
+```bash
+ls | rt '(.+?)\.tar\.gz' --group 1 
 ```
 
 ## FAQ
