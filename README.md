@@ -64,7 +64,7 @@ Get the all IDs of current Docker containers:
 docker container ls | tail -n +2 | rt '(\w+?)\s+.+' --group 1
 ```
 
-Note that you don't need a `$` at the end of the regex since `rt` is multiline by default.
+Note that you don't need a `$` at the end of the regex since `rt` is line-by-line by default.
 
 ## FAQ
 
