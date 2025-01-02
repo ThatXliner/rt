@@ -28,6 +28,14 @@ cargo build --release
 
 4. Once built, the executable will be located at ./target/release/rt.
 
+### Via mise
+
+If you have [mise](https://mise.jdx.dev/) installed:
+
+```bash
+mise use cargo:https://github.com/ThatXliner/rt@branch:main
+```
+
 ## Usage
 
 **Examples:**
@@ -49,6 +57,14 @@ Getting the folder names of tarballs:
 ```bash
 ls | rt '(.+?)\.tar\.gz' --group 1 
 ```
+
+Get the all IDs of current Docker containers:
+
+```bash
+docker container ls | tail -n +2 | rt '(\w+?)\s+.+' --group 1
+```
+
+Note that you don't need a `$` at the end of the regex since `rt` is multiline by default.
 
 ## FAQ
 
